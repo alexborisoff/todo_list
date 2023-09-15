@@ -1,0 +1,15 @@
+.grid {
+    display: grid;
+    margin: 0px 115px;
+    padding-top: 50px;
+    grid-template-columns: 350px 700px;
+    grid-template-rows: 250px 250px;
+    gap: 7px;
+}
+
+.info {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
