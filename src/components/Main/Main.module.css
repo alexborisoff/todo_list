@@ -1,3 +1,9 @@
+img {
+    width: 20px;
+    height: 20px;
+    color: white;
+}
+
 .main {
     background: linear-gradient(90deg, #f4f9db, #eff0f1);
     border: 1px solid rgb(238, 176, 176);
@@ -41,4 +47,23 @@
 .completedTask {
     text-decoration: line-through;
     opacity: 0.3;
+}
+
+.manipulationIcons {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 15px;
+    width: auto;
+    display: inline-block;
+}
+
+.manipulationIcons span {
+    display: inline-block;
+    margin: 0px 5px;
+    cursor: pointer;
+}
+
+.manipulationIcons span:hover {
+    background-color: #f4f9db;
 }
