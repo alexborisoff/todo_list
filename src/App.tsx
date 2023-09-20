@@ -1,13 +1,16 @@
-import './app.scss';
+import { Header } from './components/Header';
+import { Authorization } from './pages/Authorization';
 import { Home } from './pages/Home';
+import { Routes, Route } from 'react-router-dom';
 
 export const App = () => {
     return (
-        <div>
-            <div className="title">
-                <p> To Do List №1 </p>
-            </div>
-            <Home />
-        </div>
+        <>
+            <Header />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Authorization />} />
+            </Routes>
+        </>
     );
 };

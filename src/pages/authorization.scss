@@ -1,0 +1,67 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 400px;
+    max-width: 400px;
+    margin: 100px auto;
+
+    border-radius: 10px;
+    border: 5px solid transparent;
+    border-image: linear-gradient(
+        to left top,
+        #f4f9db 10%,
+        transparent 30%,
+        transparent 70%,
+        #89abe6 90%
+    );
+    border-image-slice: 1;
+    background: linear-gradient(90deg, #89abe6, #f4f9db);
+    color: white;
+
+    .form_text_info {
+        font-weight: 700;
+        font-size: 30px;
+    }
+
+    .inputs {
+        .login_input {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            input {
+                height: 20px;
+                min-width: 250px;
+                font-weight: 700;
+            }
+        }
+
+        .password_input {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            input {
+                height: 20px;
+                min-width: 250px;
+                font-weight: 700;
+            }
+        }
+
+        div img {
+            height: 30px;
+            width: 30px;
+        }
+    }
+
+    .buttons {
+        a {
+            color: #89abe6;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+        }
+    }
+}

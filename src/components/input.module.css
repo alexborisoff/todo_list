@@ -1,13 +1,14 @@
-.test {
+.addingInput {
+    width: 450px;
     border: 1px solid #cccccc;
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
     background: #ffffff;
     outline: none;
     height: 28px;
-    width: 120px;
     color: #2d80f4;
-    font-size: 11px;
+    font-size: 15px;
+    font-weight: 600;
     font-family: 'Tamoha';
 }

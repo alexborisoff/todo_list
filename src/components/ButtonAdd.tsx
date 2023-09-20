@@ -1,7 +1,15 @@
-export const ButtonAdd = ({ addTask }: any) => {
+import styles from './button.module.css';
+
+export const ButtonAdd = ({ addTask, text }: any) => {
     return (
         <>
-            <button onClick={addTask}> Add Task </button>
+            <button
+                className={styles.btn}
+                onClick={addTask}
+                onKeyDown={addTask}
+            >
+                Add Task
+            </button>
         </>
     );
 };

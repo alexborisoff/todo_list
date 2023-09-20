@@ -4,14 +4,14 @@ export const InputText = ({
     newTodo,
     setNewTodo,
 }: {
-    newTodo: string;
-    setNewTodo: any;
+    newTodo?: string;
+    setNewTodo?: any;
 }) => {
     return (
         <>
             <input
-                className={styles.test}
-                placeholder="Type new task"
+                className={styles.addingInput}
+                placeholder="Type new task..."
                 value={newTodo}
                 onChange={(event) => setNewTodo(event.target.value)}
             />
