@@ -12,11 +12,15 @@ export const Authorization = () => {
                 <div className="inputs">
                     <div className="login_input">
                         <img src={login} alt="login_icon" />
-                        <input type="text" placeholder="Login" />
+                        <input required type="text" placeholder="Login" />
                     </div>
                     <div className="password_input">
                         <img src={pass} alt="pass_icon" />
-                        <input type="password" placeholder="Password" />
+                        <input
+                            required
+                            type="password"
+                            placeholder="Password"
+                        />
                     </div>
                 </div>
                 <div className="buttons">

@@ -1,5 +1,21 @@
 .info {
-    background: linear-gradient(90deg, #c8a689, #f4f9db);
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    background: linear-gradient(90deg, #c8a689, #f1f7ce);
     border: 1px solid rgb(104, 104, 246);
     border-radius: 8px;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.day {
+    margin-left: 20px;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+}
+
+.time {
+    color: white;
+    text-shadow: 1px 1px 2px black;
 }

@@ -1,11 +1,8 @@
-import { Fragment } from 'react';
-import { useState } from 'react';
-import { ButtonAdd } from '../ButtonAdd';
-import { InputText } from '../InputText';
+import { useState, ChangeEvent } from 'react';
 import styles from './Main.module.css';
-import done from '../../assets/images/done.png';
-import edit from '../../assets/images/edit.png';
-import trash from '../../assets/images/trash.png';
+import { AddingTask } from '../AddingTask';
+import { UpdatingTask } from '../UpdatingTask';
+import { TodoPart } from '../TodoPart';
 
 interface ITask {
     id: number;
@@ -17,8 +14,8 @@ export const Main = () => {
     const [todo, setTodo] = useState<ITask[]>([
         { id: 10, title: 'Create Project 100%', closed: false },
         { id: 9, title: 'Create Project 90%', closed: false },
-        { id: 8, title: 'Create Project 80%', closed: false },
-        { id: 7, title: 'Create Project 70%', closed: false },
+        { id: 8, title: 'Create Project 80%', closed: true },
+        { id: 7, title: 'Create Project 70%', closed: true },
         { id: 6, title: 'Create Project 60%', closed: true },
         { id: 5, title: 'Create Project 50%', closed: true },
         { id: 4, title: 'Create Project 40%', closed: true },
@@ -29,8 +26,8 @@ export const Main = () => {
 
     const [newTodo, setNewTodo] = useState<string>('');
     const [updateTask, setUpdateTask] = useState<ITask>({
-        id: 0,
-        title: '',
+        id: 1,
+        title: 'test',
         closed: false,
     });
 
@@ -62,14 +59,15 @@ export const Main = () => {
         setUpdateTask({ id: 0, title: '', closed: true });
     };
 
-    const changeExistingTask = (e: any) => {
+    const changeExistingTask = (event: ChangeEvent<HTMLInputElement>) => {
         let newEntry = {
             id: updateTask.id,
-            title: e.target.value,
+            title: event.target.value,
             closed: updateTask.closed ? true : false,
         };
         setUpdateTask(newEntry);
     };
+
     const updateExistingTask = () => {
         let filterRecords = [...todo].filter(
             (task) => task.id !== updateTask.id
@@ -80,90 +78,30 @@ export const Main = () => {
 
     return (
         <div className={styles.main}>
-            <>
-                <InputText newTodo={newTodo} setNewTodo={setNewTodo} />
-                <ButtonAdd addTask={addTask} />
-            </>
-
-            <>
-                <input
-                    className={styles.editingInput}
-                    onChange={(e) => changeExistingTask(e)}
-                    value={updateTask.title}
+            {updateTask && updateTask ? (
+                <AddingTask
+                    newTodo={newTodo}
+                    setNewTodo={setNewTodo}
+                    addTask={addTask}
                 />
-                <button onClick={updateExistingTask} className={styles.btnUpd}>
-                    Update
-                </button>
-                <button onClick={cancelUpdateTask} className={styles.btn}>
-                    Cancel
-                </button>
-            </>
+            ) : (
+                <UpdatingTask
+                    cancelUpdateTask={cancelUpdateTask}
+                    changeExistingTask={changeExistingTask}
+                    updateExistingTask={updateExistingTask}
+                    updateTask={updateTask}
+                    styles={styles}
+                />
+            )}
 
             {todo && todo.length ? '' : 'List of tasks is empty'}
-
-            {todo &&
-                todo
-                    .sort((a, b) => (a.id > b.id ? -1 : 1))
-                    .map((task, indexTask) => {
-                        return (
-                            <Fragment key={task.id}>
-                                <div className={styles.task}>
-                                    <div
-                                        className={
-                                            task.closed
-                                                ? styles.completedTask
-                                                : ''
-                                        }
-                                    >
-                                        <span className={styles.taskCount}>
-                                            {++indexTask}
-                                        </span>
-                                        <span> {task.title} </span>
-                                    </div>
-                                    <div className={styles.manipulationIcons}>
-                                        <span
-                                            onClick={(e) =>
-                                                completedTask(task.id)
-                                            }
-                                            title="Opened / Closed"
-                                        >
-                                            <img src={done} alt="done_task" />
-                                        </span>
-
-                                        {task.closed ? null : (
-                                            <span
-                                                onClick={() =>
-                                                    setUpdateTask({
-                                                        id: task.id,
-                                                        title: task.title,
-                                                        closed: task.closed
-                                                            ? true
-                                                            : false,
-                                                    })
-                                                }
-                                                title="Edit"
-                                            >
-                                                <img
-                                                    src={edit}
-                                                    alt="edit_task"
-                                                />
-                                            </span>
-                                        )}
-
-                                        <span
-                                            title="Delete"
-                                            onClick={() => deleteTask(task.id)}
-                                        >
-                                            <img
-                                                src={trash}
-                                                alt="delete_task"
-                                            />
-                                        </span>
-                                    </div>
-                                </div>
-                            </Fragment>
-                        );
-                    })}
+            <TodoPart
+                todo={todo}
+                completedTask={completedTask}
+                setUpdateTask={setUpdateTask}
+                deleteTask={deleteTask}
+                styles={styles}
+            />
         </div>
     );
 };
