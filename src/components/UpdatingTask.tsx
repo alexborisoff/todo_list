@@ -12,18 +12,18 @@ export const UpdatingTask = ({
     styles: any;
 }) => {
     return (
-        <>
+        <div>
             <input
-                className={styles.editingInput}
-                onChange={(e) => changeExistingTask(e)}
                 value={updateTask && updateTask.title}
+                onChange={(event) => changeExistingTask(event)}
+                className={styles.editingInput}
             />
             <button onClick={updateExistingTask} className={styles.btnUpd}>
                 Update
             </button>
             <button onClick={cancelUpdateTask} className={styles.btn}>
-                Cancel Updating
+                Cancel
             </button>
-        </>
+        </div>
     );
 };

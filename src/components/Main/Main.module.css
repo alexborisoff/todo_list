@@ -5,6 +5,14 @@
     height: 100%;
 }
 
+.empty {
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    color:rgb(242, 115, 115)
+}
+
 .task {
     position: relative;
     background-color: #89abe6;

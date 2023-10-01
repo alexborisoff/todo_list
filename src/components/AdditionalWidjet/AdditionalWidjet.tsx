@@ -6,6 +6,8 @@ export const AdditionalWidjet = () => {
 
     const dayOfWeek = (day: number): string | undefined => {
         switch (day) {
+            case 0:
+                return 'Sunday';
             case 1:
                 return 'Monday';
             case 2:
@@ -18,8 +20,6 @@ export const AdditionalWidjet = () => {
                 return 'Friday';
             case 6:
                 return 'Saturday';
-            case 7:
-                return 'Sunday';
         }
     };
 

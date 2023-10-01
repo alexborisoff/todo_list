@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useEffect } from 'react';
 import styles from './Main.module.css';
 import { AddingTask } from '../AddingTask';
 import { UpdatingTask } from '../UpdatingTask';
@@ -11,38 +11,41 @@ interface ITask {
 }
 
 export const Main = () => {
-    const [todo, setTodo] = useState<ITask[]>([
-        { id: 10, title: 'Create Project 100%', closed: false },
-        { id: 9, title: 'Create Project 90%', closed: false },
-        { id: 8, title: 'Create Project 80%', closed: true },
-        { id: 7, title: 'Create Project 70%', closed: true },
-        { id: 6, title: 'Create Project 60%', closed: true },
-        { id: 5, title: 'Create Project 50%', closed: true },
-        { id: 4, title: 'Create Project 40%', closed: true },
-        { id: 3, title: 'Create Project 30%', closed: true },
-        { id: 2, title: 'Create Project 20%', closed: true },
-        { id: 1, title: 'Create Project 10%', closed: true },
-    ]);
+    const [todo, setTodo] = useState<ITask[]>([]);
+
+    useEffect(() => {
+        if (localStorage.getItem('UpdatingListOfTasks')) {
+            const taskList = JSON.parse(
+                String(localStorage.getItem('UpdatingListOfTasks'))
+            );
+            setTodo(taskList);
+        }
+    }, []);
 
     const [newTodo, setNewTodo] = useState<string>('');
-    const [updateTask, setUpdateTask] = useState<ITask>({
-        id: 1,
-        title: 'test',
+    const [updateTask, setUpdateTask] = useState({
+        id: 0,
+        title: '',
         closed: false,
     });
 
     const addTask = () => {
         if (newTodo) {
-            let counter = todo.length + 1;
-            let newEntry = { id: counter, title: newTodo, closed: false };
-            setTodo([...todo, newEntry]);
+            let newId = todo.length + 1;
+            const newAddedValue = { id: newId, title: newTodo, closed: false };
+            setTodo([...todo, newAddedValue]);
             setNewTodo('');
+            localStorage.setItem(
+                'UpdatingListOfTasks',
+                JSON.stringify([...todo, newAddedValue])
+            );
         }
     };
 
     const deleteTask = (id: number) => {
         let newTasks = todo.filter((task) => task.id !== id);
         setTodo(newTasks);
+        localStorage.setItem('UpdatingListOfTasks', JSON.stringify(newTasks));
     };
 
     const completedTask = (id: number) => {
@@ -60,31 +63,29 @@ export const Main = () => {
     };
 
     const changeExistingTask = (event: ChangeEvent<HTMLInputElement>) => {
-        let newEntry = {
+        const newChangedValue = {
             id: updateTask.id,
             title: event.target.value,
             closed: updateTask.closed ? true : false,
         };
-        setUpdateTask(newEntry);
+        setUpdateTask(newChangedValue);
+        localStorage.setItem(
+            'UpdatingListOfTasks',
+            JSON.stringify([...todo, newChangedValue])
+        );
     };
 
     const updateExistingTask = () => {
-        let filterRecords = [...todo].filter(
+        const filterRecords = [...todo].filter(
             (task) => task.id !== updateTask.id
         );
-        let updatedObject = [...filterRecords, updateTask];
+        const updatedObject = [...filterRecords, updateTask];
         setTodo(updatedObject);
     };
 
     return (
         <div className={styles.main}>
-            {updateTask && updateTask ? (
-                <AddingTask
-                    newTodo={newTodo}
-                    setNewTodo={setNewTodo}
-                    addTask={addTask}
-                />
-            ) : (
+            {updateTask.title && updateTask.title ? (
                 <UpdatingTask
                     cancelUpdateTask={cancelUpdateTask}
                     changeExistingTask={changeExistingTask}
@@ -92,9 +93,19 @@ export const Main = () => {
                     updateTask={updateTask}
                     styles={styles}
                 />
+            ) : (
+                <AddingTask
+                    newTodo={newTodo}
+                    setNewTodo={setNewTodo}
+                    addTask={addTask}
+                />
             )}
 
-            {todo && todo.length ? '' : 'List of tasks is empty'}
+            {todo && todo.length ? (
+                ''
+            ) : (
+                <p className={styles.empty}> List of tasks is empty... </p>
+            )}
             <TodoPart
                 todo={todo}
                 completedTask={completedTask}

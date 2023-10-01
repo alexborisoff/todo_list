@@ -21,7 +21,7 @@ export const TodoPart = ({
             {todo &&
                 todo
                     .sort((a: any, b: any) => (a.id > b.id ? -1 : 1))
-                    .map((task: any, indexTask: any) => {
+                    .map((task: any, indexTask: number) => {
                         return (
                             <Fragment key={task.id}>
                                 <div className={styles.task}>
