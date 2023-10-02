@@ -23,13 +23,13 @@ export const Main = () => {
     }, []);
 
     const [newTodo, setNewTodo] = useState<string>('');
-    const [updateTask, setUpdateTask] = useState({
+    const [updateTask, setUpdateTask] = useState<ITask>({
         id: 0,
         title: '',
         closed: false,
     });
 
-    const addTask = () => {
+    const addTask = (): void => {
         if (newTodo) {
             let newId = todo.length + 1;
             const newAddedValue = { id: newId, title: newTodo, closed: false };
@@ -42,14 +42,14 @@ export const Main = () => {
         }
     };
 
-    const deleteTask = (id: number) => {
+    const deleteTask = (id: number): void => {
         let newTasks = todo.filter((task) => task.id !== id);
         setTodo(newTasks);
         localStorage.setItem('UpdatingListOfTasks', JSON.stringify(newTasks));
     };
 
-    const completedTask = (id: number) => {
-        let newTask = todo.map((task) => {
+    const completedTask = (id: number): void => {
+        const newTask = todo.map((task) => {
             if (task.id === id) {
                 return { ...task, closed: !task.closed };
             }
@@ -58,7 +58,7 @@ export const Main = () => {
         setTodo(newTask);
     };
 
-    const cancelUpdateTask = () => {
+    const cancelUpdateTask = (): void => {
         setUpdateTask({ id: 0, title: '', closed: true });
     };
 
@@ -69,10 +69,6 @@ export const Main = () => {
             closed: updateTask.closed ? true : false,
         };
         setUpdateTask(newChangedValue);
-        localStorage.setItem(
-            'UpdatingListOfTasks',
-            JSON.stringify([...todo, newChangedValue])
-        );
     };
 
     const updateExistingTask = () => {
@@ -81,6 +77,7 @@ export const Main = () => {
         );
         const updatedObject = [...filterRecords, updateTask];
         setTodo(updatedObject);
+        setUpdateTask({ id: 0, title: '', closed: false });
     };
 
     return (

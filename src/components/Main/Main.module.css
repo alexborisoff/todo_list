@@ -10,7 +10,7 @@
     text-align: center;
     font-size: 30px;
     font-weight: 600;
-    color:rgb(242, 115, 115)
+    color: rgb(242, 115, 115);
 }
 
 .task {
@@ -73,7 +73,8 @@
 }
 
 .manipulationIcons span:hover {
-    background-color: green;
+    border-radius: 50%;
+    background-color: rgb(197, 240, 117);
     filter: sepia(0.5);
 }
 

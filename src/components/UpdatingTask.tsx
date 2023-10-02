@@ -1,3 +1,9 @@
+interface ITask {
+    id: number;
+    title: string;
+    closed: boolean;
+}
+
 export const UpdatingTask = ({
     cancelUpdateTask,
     changeExistingTask,
@@ -5,10 +11,10 @@ export const UpdatingTask = ({
     updateTask,
     styles,
 }: {
-    cancelUpdateTask: any;
-    changeExistingTask: any;
-    updateExistingTask: any;
-    updateTask: any;
+    cancelUpdateTask: () => void;
+    changeExistingTask: (e: any) => void;
+    updateExistingTask: () => void;
+    updateTask: ITask;
     styles: any;
 }) => {
     return (
