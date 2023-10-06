@@ -28,7 +28,7 @@ export const Authorization = () => {
                         <a href="/"> Sign In </a>
                     </button>
                     <button>
-                        <a href="/"> Sign Up </a>
+                        <a href="/registration"> Sign Up </a>
                     </button>
                 </div>
             </div>

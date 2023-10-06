@@ -1,10 +1,10 @@
 import { useState, ChangeEvent, useEffect } from 'react';
-import styles from './Main.module.css';
 import { AddingTask } from '../AddingTask';
 import { UpdatingTask } from '../UpdatingTask';
 import { TodoPart } from '../TodoPart';
+import styles from './Main.module.css';
 
-interface ITask {
+export interface ITask {
     id: number;
     title: string;
     closed: boolean;
@@ -58,7 +58,7 @@ export const Main = () => {
         setTodo(newTask);
     };
 
-    const cancelUpdateTask = (): void => {
+    const cancelUpdatingTask = (): void => {
         setUpdateTask({ id: 0, title: '', closed: true });
     };
 
@@ -84,7 +84,7 @@ export const Main = () => {
         <div className={styles.main}>
             {updateTask.title && updateTask.title ? (
                 <UpdatingTask
-                    cancelUpdateTask={cancelUpdateTask}
+                    cancelUpdatingTask={cancelUpdatingTask}
                     changeExistingTask={changeExistingTask}
                     updateExistingTask={updateExistingTask}
                     updateTask={updateTask}

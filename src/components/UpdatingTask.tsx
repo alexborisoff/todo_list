@@ -1,18 +1,15 @@
-interface ITask {
-    id: number;
-    title: string;
-    closed: boolean;
-}
+import { ChangeEvent } from 'react';
+import { ITask } from './Main/Main';
 
 export const UpdatingTask = ({
-    cancelUpdateTask,
+    cancelUpdatingTask,
     changeExistingTask,
     updateExistingTask,
     updateTask,
     styles,
 }: {
-    cancelUpdateTask: () => void;
-    changeExistingTask: (e: any) => void;
+    cancelUpdatingTask: () => void;
+    changeExistingTask: (event: ChangeEvent<HTMLInputElement>) => void;
     updateExistingTask: () => void;
     updateTask: ITask;
     styles: any;
@@ -27,7 +24,7 @@ export const UpdatingTask = ({
             <button onClick={updateExistingTask} className={styles.btnUpd}>
                 Update
             </button>
-            <button onClick={cancelUpdateTask} className={styles.btn}>
+            <button onClick={cancelUpdatingTask} className={styles.btn}>
                 Cancel
             </button>
         </div>

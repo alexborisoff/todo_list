@@ -2,19 +2,20 @@ import { Fragment } from 'react';
 import done from '../assets/images/done.png';
 import edit from '../assets/images/edit.png';
 import trash from '../assets/images/trash.png';
+import { ITask } from './Main/Main';
 
 export const TodoPart = ({
     todo,
-    styles,
     completedTask,
     setUpdateTask,
     deleteTask,
+    styles,
 }: {
-    todo: any;
+    todo: ITask[];
+    completedTask: (id: number) => void;
+    setUpdateTask: React.Dispatch<React.SetStateAction<ITask>>;
+    deleteTask: (id: number) => void;
     styles: any;
-    completedTask: any;
-    setUpdateTask: any;
-    deleteTask: any;
 }) => {
     return (
         <>
