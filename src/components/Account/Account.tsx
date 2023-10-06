@@ -10,10 +10,10 @@ export const Account = () => {
             </div>
             <ul>
                 <li>
-                    <a href="/login"> Sign In </a>
+                    <a href="/"> Refresh </a>
                 </li>
                 <li>
-                    <a href="/"> Exit </a>
+                    <a href="/login"> Exit </a>
                 </li>
             </ul>
         </div>
